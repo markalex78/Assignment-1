@@ -6,7 +6,27 @@ import Styles from '../styles/page-styles';
 export default function Page2() {
     const params = useLocalSearchParams();
     const { name, noun, event } = params;
-    const [sign, onChangeSign] = useState("");
+    const [sign, onChangeSign] = useState("Sign");
+
+    const verticalTextStyle = {
+        ...Styles.largeText,
+        transform: [{ scaleY: 2 }, { rotate: '-0deg' }],
+        marginLeft: 5, // Add some margin for spacing
+    };
+
+    const redBoxStyle = {
+        backgroundColor: 'red',
+        padding: 10,
+        borderRadius: 5,
+        marginTop: 10, // Add spacing between the date and the red box
+    };
+
+    const signInputStyle = {
+        ...Styles.input,
+        width: 200,
+        height: 40,
+        textAlign: 'center',
+    };
 
     return (
         <View style={Styles.page}>
@@ -16,27 +36,44 @@ export default function Page2() {
                 Date: {new Date().toLocaleString()}
             </Text>
 
-            <View style={{ flex: 6, alignItems: "center", justifyContent: "center", marginTop: 10 }}>
-                <Text style={Styles.largeText}>{name} is too cool</Text>
-                <Text style={Styles.largeText}>for {noun} class.</Text>
-                <Text style={Styles.largeText}>Instead, he/she will be</Text>
-                <Text style={Styles.largeText}>attending the {event}</Text>
+            <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={redBoxStyle}>
+                        <Text style={verticalTextStyle}>H</Text>
+                        <Text style={verticalTextStyle}>A</Text>
+                        <Text style={verticalTextStyle}>L</Text>
+                        <Text style={verticalTextStyle}>L</Text>
 
-                <TextInput
-                    style={Styles.input}
-                    value={sign}
-                    onChangeText={onChangeSign}
-                    placeholder="Sign: "
-                />
+                        {/* Add some spacing between the two words */}
+                        <Text style={{ ...verticalTextStyle, marginTop: 20 }}>P</Text>
+                        <Text style={verticalTextStyle}>A</Text>
+                        <Text style={verticalTextStyle}>S</Text>
+                        <Text style={verticalTextStyle}>S</Text>
+                    </View>
+                </View>
 
-                <Link
-                    style={Styles.input}
-                    href={{
-                        pathname: "/",
-                    }} asChild
-                >
-                   
-                </Link>
+                <View style={{ flex: 6, alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={Styles.largeText}>{name} is too cool</Text>
+                    <Text style={Styles.largeText}>for {noun} class.</Text>
+                    <Text style={Styles.largeText}>Instead, he/she will be</Text>
+                    <Text style={Styles.largeText}>attending the {event}</Text>
+
+                    <TextInput
+                        style={signInputStyle}
+                        placeholder="Sign"
+                        value={sign}
+                        onChangeText={onChangeSign}
+                    />
+
+                    <Link
+                        style={Styles.input}
+                        href={{
+                            pathname: "/",
+                        }} asChild
+                    >
+
+                    </Link>
+                </View>
             </View>
         </View>
     );
