@@ -13,8 +13,9 @@ export default function Page() {
             <View style={Styles.titleContainer}>
                 <Text style={Styles.titleText}>How to play Mad Libs</Text>
             </View>
-            <Text>Enter a name, noun and event</Text>
-            <Text>in the textboxes below</Text>
+            <Text>Enter a name, noun and event in the</Text>
+            <Text>textboxes below, then click on</Text>
+            <Text>"Make my Hall Pass"</Text>
             <Text style={{ marginBottom: 10 }}> </Text>
 
             <TextInput

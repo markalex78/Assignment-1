@@ -10,15 +10,15 @@ export default function Page2() {
 
     const verticalTextStyle = {
         ...Styles.largeText,
-        transform: [{ scaleY: 2 }, { rotate: '-0deg' }],
-        marginLeft: 5, // Add some margin for spacing
+        transform: [{ scaleY: 2 }, ],
+        marginLeft: 5,
     };
 
     const redBoxStyle = {
         backgroundColor: 'red',
         padding: 10,
         borderRadius: 5,
-        marginTop: 10, // Add spacing between the date and the red box
+        marginTop: 10,
     };
 
     const signInputStyle = {
@@ -44,8 +44,7 @@ export default function Page2() {
                         <Text style={verticalTextStyle}>L</Text>
                         <Text style={verticalTextStyle}>L</Text>
 
-                        {/* Add some spacing between the two words */}
-                        <Text style={{ ...verticalTextStyle, marginTop: 20 }}>P</Text>
+                        <Text style={{ ...verticalTextStyle, marginTop: 30 }}>P</Text>
                         <Text style={verticalTextStyle}>A</Text>
                         <Text style={verticalTextStyle}>S</Text>
                         <Text style={verticalTextStyle}>S</Text>
