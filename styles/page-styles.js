@@ -35,6 +35,15 @@ const styles = StyleSheet.create({
         marginBottom: 40,
         textAlign: 'center',
     },
+
+    hallPass: {  
+        textAlign: 'center',
+        justifyContent: 'center',
+        alignItems:'center',
+        alignContent: 'stretch',
+        transform: [{ rotateX: '0deg' }, { rotateZ: '-1.5rad' }],
+        fontSize: 10,
+    },
 });
 
 export default styles;

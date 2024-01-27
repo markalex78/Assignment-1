@@ -1,77 +1,121 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, Pressable, TextInput } from 'react-native';
-import { Link, useLocalSearchParams } from 'expo-router';
-import Styles from '../styles/page-styles';
+import { useNavigation } from 'expo-router';
+import { useRoute } from '@react-navigation/native';
 
 export default function Page2() {
-    const params = useLocalSearchParams();
-    const { name, noun, event } = params;
+    const navigation = useNavigation();
+    const route = useRoute();
+    const { name, noun, event } = route.params || {};
     const [sign, onChangeSign] = useState("Sign");
+    const [dateTime, setDateTime] = useState(new Date().toLocaleString());
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setDateTime(new Date().toLocaleString());
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, []);
+
+    const headerStyles = {
+        height: '10%',
+        backgroundColor: 'red',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    };
+
+    const headerTextStyle = {
+        color: 'white',
+        fontSize: 20,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        flex: 1,
+    };
 
     const verticalTextStyle = {
-        ...Styles.largeText,
-        transform: [{ scaleY: 2 }, ],
+        fontSize: 30,
+        fontWeight: 'bold',
         marginLeft: 5,
     };
 
     const redBoxStyle = {
         backgroundColor: 'red',
-        padding: 10,
-        borderRadius: 5,
-        marginTop: 10,
+        padding: 25,
+        borderRadius: 10,
+        marginTop: 5,
     };
 
     const signInputStyle = {
-        ...Styles.input,
         width: 200,
         height: 40,
         textAlign: 'center',
+        backgroundColor: 'white',
+        marginTop: 10,
+        borderWidth: 2, 
+        borderColor: 'black',
+        borderRadius: 5,
+    };
+
+    const halfScreenStyle = {
+        flex: 1,
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    };
+
+    const topHalfStyle = {
+        ...halfScreenStyle,
+        justifyContent: 'flex-start', 
+    };
+
+    const middleHalfStyle = {
+        ...halfScreenStyle,
+        justifyContent: 'flex-start',
     };
 
     return (
-        <View style={Styles.page}>
-            <Text style={{ ...Styles.title, fontWeight: 'bold', fontSize: 30 }}>Mad Libs</Text>
+        <View style={{ flex: 1 }}>
+            <View style={headerStyles}>
+                <Pressable
+                    onPress={() => navigation.goBack()}
+                    style={{ marginLeft: 15 }}
+                >
+                    <Text style={{ color: 'white', fontSize: 20 }}>{`<--`}</Text>
+                </Pressable>
+                <Text style={headerTextStyle}>Assignment 1</Text>
+            </View>
 
-            <Text style={{ marginTop: 10, fontWeight: 'bold', fontSize: 18 }}>
-                Date: {new Date().toLocaleString()}
-            </Text>
-
-            <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                    <View style={redBoxStyle}>
-                        <Text style={verticalTextStyle}>H</Text>
-                        <Text style={verticalTextStyle}>A</Text>
-                        <Text style={verticalTextStyle}>L</Text>
-                        <Text style={verticalTextStyle}>L</Text>
-
-                        <Text style={{ ...verticalTextStyle, marginTop: 30 }}>P</Text>
-                        <Text style={verticalTextStyle}>A</Text>
-                        <Text style={verticalTextStyle}>S</Text>
-                        <Text style={verticalTextStyle}>S</Text>
+            <View style={{ flex: 9, flexDirection: 'row' }}>
+                <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}>
+                    <View style={{ ...redBoxStyle, paddingVertical: 80 }}>
+                        <Text style={verticalTextStyle}>H{'\n'}A{'\n'}L{'\n'}L{'\n'}</Text>
+                        <Text style={verticalTextStyle}>P{'\n'}A{'\n'}S{'\n'}S</Text>
                     </View>
                 </View>
 
-                <View style={{ flex: 6, alignItems: 'center', justifyContent: 'center' }}>
-                    <Text style={Styles.largeText}>{name} is too cool</Text>
-                    <Text style={Styles.largeText}>for {noun} class.</Text>
-                    <Text style={Styles.largeText}>Instead, he/she will be</Text>
-                    <Text style={Styles.largeText}>attending the {event}</Text>
+                <View style={{ flex: 8, flexDirection: 'column' }}>
+                    <View style={topHalfStyle}>
+                        <Text style={{ fontSize: 30, fontWeight: 'bold' }}>Mad Libs</Text>
+                        <Text>{dateTime}</Text>
+                    </View>
 
-                    <TextInput
-                        style={signInputStyle}
-                        placeholder="Sign"
-                        value={sign}
-                        onChangeText={onChangeSign}
-                    />
+                    <View style={middleHalfStyle}>
+                        <Text style={{ fontSize: 25, fontWeight: 'bold' }}>{name} is too cool</Text>
+                        <Text style={{ fontSize: 25, fontWeight: 'bold' }}>for {noun} class.</Text>
+                        <Text style={{ fontSize: 25, fontWeight: 'bold' }}>Instead, he/she will be</Text>
+                        <Text style={{ fontSize: 25, fontWeight: 'bold' }}>attending the {event}.</Text>
+                    </View>
 
-                    <Link
-                        style={Styles.input}
-                        href={{
-                            pathname: "/",
-                        }} asChild
-                    >
-
-                    </Link>
+                    <View style={halfScreenStyle}>
+                        <TextInput
+                            style={signInputStyle}
+                            placeholder="Sign"
+                            value={sign}
+                            onChangeText={onChangeSign}
+                        />
+                    </View>
                 </View>
             </View>
         </View>

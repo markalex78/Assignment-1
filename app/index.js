@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TextInput, View, Pressable, ScrollView } from 'react-native';
+import { Text, TextInput, View, Pressable } from 'react-native';
 import { Link } from 'expo-router';
 import Styles from '../styles/page-styles';
 
@@ -9,14 +9,13 @@ export default function Page() {
     const [event, onChangeEvent] = React.useState("");
 
     return (
-        <ScrollView contentContainerStyle={Styles.page}>
+        <View style={Styles.page}>
             <View style={Styles.titleContainer}>
                 <Text style={Styles.titleText}>How to play Mad Libs</Text>
             </View>
-            <Text>Enter a name, noun and event in the</Text>
-            <Text>textboxes below, then click on</Text>
-            <Text>"Make my Hall Pass"</Text>
-            <Text style={{ marginBottom: 10 }}> </Text>
+            <Text>Enter a name, noun, and event</Text>
+            <Text>Click on "Make my Hall Pass"</Text>
+            <Text>To see the story you created.</Text>
 
             <TextInput
                 style={Styles.input}
@@ -62,6 +61,6 @@ export default function Page() {
             >
                 <Text>Clear</Text>
             </Pressable>
-        </ScrollView>
+        </View>
     );
 }

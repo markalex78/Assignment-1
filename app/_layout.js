@@ -19,7 +19,7 @@ export default function Layout() {
             <Stack.Screen
                 name="page2"
                 options={({ navigation }) => ({
-                    headerShown: true,
+                    headerShown: false,
                     headerLeft: () => (
                         <Pressable
                             onPress={() => navigation.goBack()}
